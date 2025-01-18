@@ -20,7 +20,7 @@ const Add = ({url}) => {
     setData(data=>({...data,[name]:value}))
    }
 
-   const onSubmitHanler = async (event) => {
+   const onSubmitHandler = async (event) => {
       event.preventDefault(); // Prevent page reloading
       const formData = new FormData();
       formData.append("name",data.name)
@@ -49,7 +49,7 @@ const Add = ({url}) => {
 
   return (
     <div className='add'>
-        <form className='flex-col' onSubmit={onSubmitHanler}>
+        <form className='flex-col' onSubmit={onSubmitHandler}>
             <div className="add-img-upload flex-col">
                 <p>Upload Image</p>
                 <label htmlFor='image'>

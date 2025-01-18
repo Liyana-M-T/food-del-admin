@@ -2,6 +2,8 @@ import React from 'react'
 import './SideBar.css'
 import { assets } from '../../assets/assets'
 import { NavLink } from 'react-router-dom'
+import { FaUserCog } from "react-icons/fa";
+
 const SideBar = () => {
   return (
     <div className='sidebar'>
@@ -17,6 +19,13 @@ const SideBar = () => {
         <NavLink to='/orders' className="sidebar-option">
             <img src={assets.order_icon} alt="" />
             <p>Orders</p>
+        </NavLink>
+        <NavLink to='/user' className="sidebar-option">
+        <FaUserCog className='user-icon'/>
+            <p>User Management</p>
+        </NavLink>
+        <NavLink to='/promocode' className="sidebar-option">
+            <p>Promo Codes</p>
         </NavLink>
       </div>
     </div>

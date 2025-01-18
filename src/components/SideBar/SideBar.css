@@ -26,6 +26,10 @@
     background-color: #fff0ed;
     border-color: tomato;
 }
+.user-icon{
+    width: 30px;
+    height: 25px;
+}
 @media (max-width:900px){
     .sidebar-option p{
        display: none; 

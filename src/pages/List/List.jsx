@@ -2,6 +2,7 @@ import React, { useState , useEffect } from 'react'
 import './List.css'
 import axios from "axios"
 import { toast } from 'react-toastify'
+import Swal from "sweetalert2";
 
 const List = ({url}) => {
 
@@ -21,16 +22,33 @@ const List = ({url}) => {
     }
   }
 
-  const removeFood = async(foodId) => {
-   //console.log(foodId);
-   const response = await axios.post(`${url}/api/food/remove`,{id:foodId})
-   await fetchList();
-   if(response.data.success){
-    toast.success(response.data.message)
-   }else{
-    toast.error("Error")
-   }
-  }
+  const removeFood = async (foodId) => {
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Do you really want to remove this food item? This action cannot be undone.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await axios.post(`${url}/api/food/remove`, { id: foodId });
+          if (response.data.success) {
+            toast.success(response.data.message);
+            await fetchList(); // Refresh the list after deletion
+          } else {
+            toast.error("Error deleting food item");
+          }
+        } catch (error) {
+          toast.error("An error occurred while deleting the food item");
+        }
+      }
+    });
+  };
+
 
   useEffect(() => {
    fetchList()

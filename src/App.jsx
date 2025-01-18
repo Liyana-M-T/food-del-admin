@@ -6,6 +6,8 @@ import Add from './pages/Add/Add'
 import List from './pages/List/List'
 import Orders from './pages/Orders/Orders'
 import { ToastContainer } from 'react-toastify';
+import Users from './pages/Users/Users'
+import PromoCode from './pages/PromoCode/PromoCode'
 
 const App = () => {
 
@@ -22,6 +24,8 @@ const App = () => {
           <Route path='/add' element={<Add url={url}/>}/>
           <Route path='/list' element={<List url={url}/>}/>
           <Route path='/orders' element={<Orders url={url}/>}/>
+          <Route path='/user' element={<Users url={url}/>}/>
+          <Route path="/promocode" element={<PromoCode url={url} />} />
           
 
         </Routes>
