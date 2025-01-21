@@ -3,6 +3,8 @@ import './SideBar.css'
 import { assets } from '../../assets/assets'
 import { NavLink } from 'react-router-dom'
 import { FaUserCog } from "react-icons/fa";
+import { FaShoppingCart } from "react-icons/fa";
+import { CiDiscount1 } from "react-icons/ci";
 
 const SideBar = () => {
   return (
@@ -17,14 +19,15 @@ const SideBar = () => {
             <p>list Items</p>
         </NavLink>
         <NavLink to='/orders' className="sidebar-option">
-            <img src={assets.order_icon} alt="" />
+        <FaShoppingCart className='icons'/>
             <p>Orders</p>
         </NavLink>
         <NavLink to='/user' className="sidebar-option">
-        <FaUserCog className='user-icon'/>
+        <FaUserCog className='icons'/>
             <p>User Management</p>
         </NavLink>
         <NavLink to='/promocode' className="sidebar-option">
+        <CiDiscount1 className='icons' />
             <p>Promo Codes</p>
         </NavLink>
       </div>
