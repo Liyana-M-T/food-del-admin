@@ -1,17 +1,20 @@
 import React, { useState , useEffect } from 'react'
 import './List.css'
 import axios from "axios"
+import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import Swal from "sweetalert2";
+import { CiCircleRemove } from "react-icons/ci";
+import { FaEdit } from "react-icons/fa";
 
 const List = ({url}) => {
 
  
   const [list,setList] = useState([]);
+  const navigate = useNavigate();
 
   const fetchList = async () => {
     const response = await axios.get(`${url}/api/food/list`)
-    console.log(response.data);
     
     if(response.data.success) {
       setList(response.data.data)
@@ -70,8 +73,11 @@ const List = ({url}) => {
               <img src={`${url}/images/`+item.image} alt="" />
               <p>{item.name}</p>
               <p>{item.category}</p>
-              <p>${item.price}</p>
-              <p onClick={()=> removeFood(item._id)} className='cursor'>X</p>
+              <p>Rs.{item.price}</p>
+              <p >
+              <FaEdit className='edit-icons' onClick={() => navigate(`/edit/${item._id}`, { state: { item } })}/>
+              <CiCircleRemove onClick={()=> removeFood(item._id)} className='edit-icons' /> 
+              </p>
             </div>
           )
         })}
