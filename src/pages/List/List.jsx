@@ -9,7 +9,6 @@ import { FaEdit } from "react-icons/fa";
 
 const List = ({url}) => {
 
- 
   const [list,setList] = useState([]);
   const navigate = useNavigate();
 
@@ -41,7 +40,7 @@ const List = ({url}) => {
           const response = await axios.post(`${url}/api/food/remove`, { id: foodId });
           if (response.data.success) {
             toast.success(response.data.message);
-            await fetchList(); // Refresh the list after deletion
+            await fetchList(); 
           } else {
             toast.error("Error deleting food item");
           }
@@ -52,10 +51,10 @@ const List = ({url}) => {
     });
   };
 
-
   useEffect(() => {
    fetchList()
   },[])
+
   return (
     <div className='list add flex-col'>
       <p>All Foods List</p>
@@ -86,4 +85,4 @@ const List = ({url}) => {
   )
 }
 
-export default List
+export default List;

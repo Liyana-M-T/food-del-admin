@@ -6,10 +6,10 @@ import "./Users.css";
 
 const Users = ({ url }) => {
   const [list, setList] = useState([]);
-  const [editUser, setEditUser] = useState(null); // State for user being edited
-  const [formData, setFormData] = useState({ name: "", password: "" }); // Form data for editing
+  const [editUser, setEditUser] = useState(null);
+  const [formData, setFormData] = useState({ name: "", password: "" }); 
 
-  // Fetch all users
+
   const fetchUsers = async () => {
     try {
       const response = await axios.get(`${url}/api/user/list`);
@@ -24,7 +24,7 @@ const Users = ({ url }) => {
     }
   };
 
-  // Delete a user
+
   const deleteUser = async (userId) => {
     Swal.fire({
       title: "Are you sure?",
@@ -41,7 +41,7 @@ const Users = ({ url }) => {
           const response = await axios.delete(`${url}/api/user/remove/${userId}`);
           if (response.data.success) {
             Swal.fire("Deleted!", "The user has been deleted.", "success");
-            fetchUsers(); // Refresh user list
+            fetchUsers(); 
           } else {
             Swal.fire("Error", "Failed to delete the user.", "error");
           }
@@ -53,13 +53,11 @@ const Users = ({ url }) => {
     });
   };
 
-  // Start editing a user
   const startEditUser = (user) => {
     setEditUser(user._id);
-    setFormData({ name: user.name, password: "" }); // Prefill name, leave password blank
+    setFormData({ name: user.name, password: "" }); 
   };
 
-  // Save edited user
   const saveUser = async () => {
     try {
       const response = await axios.put(`${url}/api/user/update/${editUser}`, formData);

@@ -1,5 +1,5 @@
 .promo-code-management {
-    padding: 20px;
+    padding: 3rem;
   }
   
   .promo-code-form {
@@ -18,7 +18,25 @@
   .promo-code-list {
     margin-top: 20px;
   }
+
+  .existing-promo{
+    padding-bottom: 1rem;
+  }
+
+  .status{
+    color: black;
+  }
   
+  .status-active {
+    color: green;
+    font-weight: bold;
+  }
+  
+  .status-inactive {
+    color: rgb(201, 9, 9);
+    font-weight: bold;
+  }
+
   .promo-code-item {
     padding: 15px;
     border: 1px solid #ddd;

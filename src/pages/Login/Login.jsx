@@ -1,18 +1,22 @@
 import React, { useContext, useState } from 'react';
 import './Login.css';
 import axios from 'axios';
+import {useNavigate } from 'react-router-dom';
 
-const Login = ({ url,setShowLogin }) => {
-
+const Login = ({ url }) => {
+  
+  const navigate = useNavigate(); 
   const [data, setData] = useState({
     email: '',
     password: '',
   });
-
+  const [token,setToken] = useState("");
+  
   const onChangeHandler = (event) => {
     const { name, value } = event.target;
     setData((prev) => ({ ...prev, [name]: value }));
   };
+       
 
   const onLogin = async (event) => {
     event.preventDefault();
@@ -25,11 +29,10 @@ const Login = ({ url,setShowLogin }) => {
         setToken(response.data.token);
         localStorage.setItem('token', response.data.token);
         alert('Login successful!');
-        setShowLogin(false); 
+        navigate('/')
       } else {
         alert(response.data.message);
       }
-      console.log(response.data,"yy");
       
     } catch (error) {
       console.error('Error during login:', error);

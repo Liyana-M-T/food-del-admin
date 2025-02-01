@@ -76,11 +76,6 @@
     transition: background-color 0.3s ease, transform 0.2s ease;
   }
   
-  .login-page-container button:hover {
-    background-color: #e94c3d; 
-    transform: scale(1.05); 
-  }
-  
   .login-page-container button:active {
     transform: scale(0.95); 
   }

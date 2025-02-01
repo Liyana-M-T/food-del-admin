@@ -12,7 +12,6 @@ const PromoCodeManagement = ({ url }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  // Fetch Promo Codes from Backend
   useEffect(() => {
     const fetchPromoCodes = async () => {
       setLoading(true);
@@ -30,13 +29,13 @@ const PromoCodeManagement = ({ url }) => {
     fetchPromoCodes();
   }, [url]);
 
-  // Handle Input Change
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setNewPromoCode({ ...newPromoCode, [name]: value });
   };
 
-  // Create Promo Code
+
   const handleCreatePromoCode = async (e) => {
     e.preventDefault();
     setError('');
@@ -50,7 +49,7 @@ const PromoCodeManagement = ({ url }) => {
     }
   };
 
-  // Deactivate Promo Code
+ 
   const handleDeactivatePromoCode = async (code) => {
     setError('');
     try {
@@ -66,8 +65,6 @@ const PromoCodeManagement = ({ url }) => {
 
   return (
     <div className="promo-code-management">
-      <h2>Promo Code Management</h2>
-
       {error && <p className="error">{error}</p>}
       {loading && <p>Loading...</p>}
 
@@ -99,16 +96,20 @@ const PromoCodeManagement = ({ url }) => {
           Create Promo Code
         </button>
       </form>
-
       <div className="promo-code-list">
-        <h3>Existing Promo Codes</h3>
+        <h3 className='existing-promo'>Existing Promo Codes</h3>
         {promoCodes.length === 0 && !loading && <p>No promo codes available.</p>}
         {promoCodes.map((promo) => (
           <div key={promo.code} className="promo-code-item">
             <p>Code: {promo.code}</p>
             <p>Discount: {promo.discount}%</p>
             <p>Expiration: {promo.expirationDate ? new Date(promo.expirationDate).toLocaleDateString() : 'N/A'}</p>
-            <p>Status: {promo.isActive ? 'Active' : 'Inactive'}</p>
+            <p className="status">
+               Status: 
+              <span className={promo.isActive ? 'status-active' : 'status-inactive'}>
+               {promo.isActive ? 'Active' : 'Inactive'}
+              </span>
+            </p>
             {promo.isActive && (
               <button onClick={() => handleDeactivatePromoCode(promo.code)}>
                 Deactivate

@@ -20,7 +20,7 @@ const Add = ({url}) => {
    }
 
    const onSubmitHandler = async (event) => {
-      event.preventDefault(); // Prevent page reloading
+      event.preventDefault(); 
       const formData = new FormData();
       formData.append("name",data.name)
       formData.append("description",data.description)
@@ -29,7 +29,6 @@ const Add = ({url}) => {
       formData.append("image",image)
       const response = await axios.post(`${url}/api/food/add`,formData);
       if(response.data.success){
-        // reset form state
          setData({
             name:"",
             description:"",
@@ -41,10 +40,8 @@ const Add = ({url}) => {
       }
       else{
        toast.error(response.data.message)
-       
       }
     }
-
 
   return (
     <div className='add'>
@@ -85,7 +82,6 @@ const Add = ({url}) => {
             </div>
             <button type='submit' className='add-btn'>ADD</button>
         </form>
-      
     </div>
   )
 }

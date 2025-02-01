@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -8,8 +8,6 @@ const Edit = ({ url }) => {
   const { id } = useParams();
   const { item } = state; 
   const navigate = useNavigate();
-
-  
   const [image, setImage] = useState(item.image); 
   const [data, setData] = useState({
     name: item.name,
@@ -24,22 +22,20 @@ const Edit = ({ url }) => {
   };
 
   const onSubmitHandler = async (event) => {
-    event.preventDefault(); // Prevent page reloading
+    event.preventDefault(); 
     const formData = new FormData();
-    formData.append("id", id); // Add the item's ID
+    formData.append("id", id); 
     formData.append("name", data.name);
     formData.append("description", data.description);
     formData.append("price", Number(data.price));
     formData.append("category", data.category);
     console.log(formData.get("id"),"11");
     
-    // If a new image is selected, append it to the form data
     if (image && typeof image !== 'string') {
-      formData.append("image", image); // If it's a new file
+      formData.append("image", image); 
     } else if (image && typeof image === 'string') {
-      formData.append("image", image); // If it's an existing image URL/path
+      formData.append("image", image); 
     }
-    console.log(image,"image")
     try {
       const response = await axios.put(`${url}/api/food/update`, formData, {
         headers: {
@@ -48,7 +44,7 @@ const Edit = ({ url }) => {
       });
       if (response.data.success) {
         toast.success(response.data.message);
-        navigate("/list"); // Redirect back to the list
+        navigate("/list"); 
       } else {
         toast.error(response.data.message);
       }
@@ -65,15 +61,15 @@ const Edit = ({ url }) => {
           <label htmlFor="image">
             <img
               src={
-                image && typeof image !== 'string' // If image is a new file, display it
-                  ? URL.createObjectURL(image)  // Display the selected image file
-                  : `${url}/images/${item.image}`  // Otherwise, display the existing image
+                image && typeof image !== 'string' 
+                  ? URL.createObjectURL(image)  
+                  : `${url}/images/${item.image}`  
               }
               alt="Product"
             />
           </label>
           <input
-            onChange={(e) => setImage(e.target.files[0])} // Handle new image selection
+            onChange={(e) => setImage(e.target.files[0])} 
             type="file"
             id="image"
             hidden
